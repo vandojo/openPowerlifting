@@ -5,7 +5,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Form />
+        <Form liftType={"Squat"} attemptNo={"First"} />
+        <Form liftType={"Squat"} attemptNo={"Second"} />
+        <Form liftType={"Squat"} attemptNo={"Third"} />
       </header>
     </div>
   );

@@ -1,18 +1,9 @@
-import {useState} from "react";
+import {FormInput} from "./forminput";
 
-export function Form() {
-  const [squatOpener, setSquatOpener] = useState("");
-
-  const handleChange = (e) => {
-    setSquatOpener(e.target.value);
-  };
-
+export function Form({attemptNo, liftType}) {
   return (
     <form>
-      <label>
-        Enter Your Squat Opener:
-        <input type="text" value={squatOpener} onChange={handleChange} />
-      </label>
+      <FormInput attemptNo={attemptNo} liftType={liftType} />
     </form>
   );
 }
