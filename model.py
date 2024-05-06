@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from randomForestModel import randomForestTrainer
 
 
-def main():
+def main(file_name):
 
     # columns to load
     cols = ['Sex', 'Event', 'Equipment', 'Squat1Kg','Squat2Kg','Squat3Kg',
@@ -45,8 +45,9 @@ def main():
     model = randomForestTrainer(df[['Squat1Kg', 'Sex']], df['Squat2Kg'], params=params)
 
     # save the model to a pickle file
-    pickle.dump(model, open('squat_1_2.pkl', 'wb'))
+    pickle.dump(model, open(file_name, 'wb'))
 
 
 if __name__ == '__main__':
+    # enter a filename
     main()
