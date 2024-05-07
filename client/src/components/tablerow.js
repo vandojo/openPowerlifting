@@ -2,7 +2,7 @@ export function TableRow({attempts}) {
   //const attempts = ["Squat", 175, 185, 195];
   //const attempts = {{lift.attempts}.map(attempt => <td>{attempt}</td>)}
   const tableRow = attempts.map((lift) => (
-    <tr>
+    <tr key={lift.id}>
       <td>{lift.liftName}</td>
       <td>{lift.firstAttempt}</td>
       <td>{lift.secondAttempt}</td>

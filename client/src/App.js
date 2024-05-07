@@ -2,12 +2,30 @@ import "./App.css";
 import {useState} from "react";
 import {Form} from "./components/form.js";
 import {Table} from "./components/table.js";
+import FlaskAPI from "./components/flaskAPI.js";
 
 function App() {
-  const [formData, setFormData] = useState("");
+  const [formData, setFormData] = useState({
+    Squat: "",
+    "Bench Press": "",
+    Deadlift: "",
+    WeightMetric: "",
+  });
 
-  const handleFormData = (data) => {
-    setFormData(data);
+  const [predictions, setPredictions] = useState([]);
+
+  const handlePredictions = (response) => {
+    console.log("a new one");
+    //setPredictions(...response);
+    setPredictions(response.Prediction);
+    console.log(predictions);
+  };
+
+  const testSquat = () => {
+    FlaskAPI.squat(formData).then((response) => {
+      //console.log(response);
+      handlePredictions(response);
+    });
   };
   const attempts = [
     {
@@ -35,8 +53,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Form onFormSubmit={handleFormData} />
-        <p>{formData == "" ? "submit a form" : console.log(formData)}</p>
+        <Form
+          onFormSubmit={testSquat}
+          formdata={formData}
+          setformdata={setFormData}
+        />
+
         <Table attempts={attempts} />
       </header>
     </div>
