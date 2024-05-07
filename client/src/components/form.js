@@ -1,7 +1,10 @@
 import {LiftCard} from "./liftcard";
 import {FormButton} from "./formbutton";
+import {useState} from "react";
 
-export function Form() {
+export function Form({onFormSubmit}) {
+  const [attemptData, setAttemptData] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -10,8 +13,10 @@ export function Form() {
     const formData = new FormData(form);
 
     const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
+    setAttemptData([formJson]);
+    onFormSubmit(attemptData);
   };
+
   return (
     <form method="post" onSubmit={handleSubmit}>
       <LiftCard liftType={"Squat"} opener={100} />
