@@ -1,17 +1,20 @@
 import {LiftCard} from "./liftcard";
-import {FormSelect} from "./formselect";
 import {FormButton} from "./formbutton";
-import {useState} from "react";
+import {Checkbox} from "./checkbox";
 import FlaskAPI from "./flaskAPI";
 
-export function Form({onFormSubmit, formdata, setformdata}) {
-  // state for form data
-
-  const insertTest = () => {
-    FlaskAPI.test(formdata).then((response) => console.log(response));
+export function Form({formdata, setformdata, setPredictions, inputnumber}) {
+  const handlePredictions = (response) => {
+    setPredictions(response.Prediction);
   };
 
-  const [attemptData, setAttemptData] = useState("");
+  // Calls the server with the form data
+  // need to rename this to generic function
+  const getPredictions = () => {
+    FlaskAPI.predict(formdata).then((response) => {
+      handlePredictions(response);
+    });
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -22,29 +25,41 @@ export function Form({onFormSubmit, formdata, setformdata}) {
     setformdata(inputData);
   };
 
+  // This is the function that calls testSquat which calls the server
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const form = e.target;
-
-    const formData2 = new FormData(form);
-
-    const formJson = Object.fromEntries(formData2.entries());
-    setAttemptData([formJson]);
-    onFormSubmit(attemptData);
-    //console.log(formJson);
-    onFormSubmit();
-    //insertTest();
+    getPredictions();
   };
 
   return (
-    <form method="post" action="/predictSq" onSubmit={handleSubmit}>
-      <LiftCard liftType={"Squat"} opener={100} onchange={handleChange} />
-      <LiftCard liftType={"Bench Press"} opener={200} onchange={handleChange} />
-      <LiftCard liftType={"Deadlift"} opener={300} onchange={handleChange} />
-      <FormSelect />
+    <form
+      method="post"
+      className="basis-1/2  max-w-sm"
+      action="/predictSq"
+      onSubmit={handleSubmit}
+    >
+      <LiftCard
+        liftType={"Squat"}
+        opener={0}
+        onchange={handleChange}
+        inputnumber={inputnumber}
+      />
+      <LiftCard
+        liftType={"Bench Press"}
+        opener={0}
+        onchange={handleChange}
+        inputnumber={inputnumber}
+      />
+      <LiftCard
+        liftType={"Deadlift"}
+        opener={0}
+        onchange={handleChange}
+        inputnumber={inputnumber}
+      />
+      <Checkbox />
+
       <FormButton type={"submit"} value={"Submit"} />
-      <FormButton type={"reset"} value={"Reset"} />
     </form>
   );
 }

@@ -11,7 +11,10 @@ export default class FlaskAPI {
       .catch((error) => console.log(error));
   }
 
-  static squat(body) {
+  // call this flaskAPI
+  // process which function is needed,
+
+  static predict(body) {
     return fetch(`http://localhost:5000/predictSq`, {
       method: "POST",
       headers: {

@@ -1,9 +1,12 @@
 import {FormInput} from "./forminput";
 
-export function LiftCard({liftType, opener = 0, onchange}) {
+export function LiftCard({liftType, opener = 0, onchange, inputnumber}) {
   return (
-    <div className="card">
-      <FormInput label={liftType} placeholder={opener} onchange={onchange} />
-    </div>
+    <FormInput
+      label={liftType}
+      placeholder={opener}
+      onchange={onchange}
+      inputnumber={inputnumber}
+    />
   );
 }
