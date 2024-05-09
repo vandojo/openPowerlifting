@@ -2,64 +2,31 @@ import "./App.css";
 import {useState} from "react";
 import {Form} from "./components/form.js";
 import {Table} from "./components/table.js";
-import FlaskAPI from "./components/flaskAPI.js";
 
 function App() {
   const [formData, setFormData] = useState({
     Squat: "",
     "Bench Press": "",
     Deadlift: "",
-    WeightMetric: "",
   });
 
-  const [predictions, setPredictions] = useState([]);
+  const [predictions, setPredictions] = useState({madePrediction: false});
 
-  const handlePredictions = (response) => {
-    console.log("a new one");
-    //setPredictions(...response);
-    setPredictions(response.Prediction);
-    console.log(predictions);
-  };
-
-  const testSquat = () => {
-    FlaskAPI.squat(formData).then((response) => {
-      //console.log(response);
-      handlePredictions(response);
-    });
-  };
-  const attempts = [
-    {
-      id: 0,
-      liftName: "Squat",
-      firstAttempt: 175,
-      secondAttempt: 185,
-      thirdAttempt: 195,
-    },
-    {
-      id: 1,
-      liftName: "Bench press",
-      firstAttempt: 175,
-      secondAttempt: 185,
-      thirdAttempt: 195,
-    },
-    {
-      id: 2,
-      liftName: "Deadlift",
-      firstAttempt: 175,
-      secondAttempt: 185,
-      thirdAttempt: 195,
-    },
-  ];
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header flex flex-row grid grid-rows-2 grid-flow-col gap-4">
         <Form
-          onFormSubmit={testSquat}
           formdata={formData}
           setformdata={setFormData}
+          setPredictions={setPredictions}
+          inputnumber={1}
         />
 
-        <Table attempts={attempts} />
+        <Table
+          attempts={predictions}
+          containspredictions={predictions.madePrediction}
+          colnames={["Lift, First, Second, Third"]}
+        />
       </header>
     </div>
   );
