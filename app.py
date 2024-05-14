@@ -38,23 +38,25 @@ def predictSq():
     try:
 
         data = request.get_json()
+
+        sq1 = float(data['Squat1'])
+        bp1 = float(data['Bench1'])
+        dl1 = float(data['Deadlift1'])
         
         
 
-        sq_df = pd.DataFrame({'Squat1Kg':[175], 'Squat2Kg': [data['Squat']]})
-        bp_df = pd.DataFrame({'Bench1Kg':[110], 'Bench2Kg': [data['Bench Press']]})
-        dl_df = pd.DataFrame({'Deadlift1Kg':[200], 'Deadlift2Kg': [data['Deadlift']]})
+        sq_df = pd.DataFrame({'Squat1Kg':[95], 'Squat2Kg': [sq1]})
+        bp_df = pd.DataFrame({'Bench1Kg':[50], 'Bench2Kg': [bp1]})
+        dl_df = pd.DataFrame({'Deadlift1Kg':[120], 'Deadlift2Kg': [dl1]})
         
-        sq1 = int(data['Squat'])
-        bp1 = int(data['Bench Press'])
-        dl1 = int(data['Deadlift'])
+        
         sq3 = thirdSQ.predict(sq_df)
         bp3 = thirdBP.predict(bp_df)
         dl3 = thirdDL.predict(dl_df)
         
         prediction = np.concatenate((sq3,bp3,dl3), axis=None)
 
-        return jsonify({"Prediction": {"Squat":[175, sq1, prediction[0]],'Bench Press':[110, bp1, prediction[1]], 'Deadlift': [200, dl1, prediction[2]]}})
+        return jsonify({"Prediction": {"Squat":[175, sq1, prediction[0], 0],'Bench Press':[110, bp1, prediction[1], 1], 'Deadlift': [200, dl1, prediction[2], 2], "madePrediction": True}})
     
     except Exception as e:
         return jsonify({'error': str(e)})
