@@ -135,20 +135,57 @@ export function Test() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <label className="inline-flex items-center me-5 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      value=""
-                      className="sr-only peer"
-                      defaultChecked
-                    />
-                    <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-purple-600"></div>
-                    <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                      Weights are in kilos
+              <div
+                className=" [&>[data-slot=text]]mt-1 grid grid-cols-2 gap-4"
+                role="group"
+              >
+                <div className="flex flex-wrap justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <label className="inline-flex items-center me-5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value=""
+                        className="sr-only peer"
+                        defaultChecked
+                      />
+                      <div className="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-purple-600"></div>
+                      <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        Weights are in kilos
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="space-y-8 " data-slot="control">
+                  <div className="text-left [&>[data-slot=label]+[data-slot=control]]:mt-3 [&>[data-slot=label]+[data-slot=description]]:mt-1 [&>[data-slot=description]+[data-slot=control]]:mt-3 [&>[data-slot=control]+[data-slot=description]]:mt-3 [&>[data-slot=control]+[data-slot=error]]:mt-3 [&>[data-slot=label]]:font-medium">
+                    <label
+                      data-slot="label"
+                      className="select-none text-base/6 text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6 dark:text-white"
+                    >
+                      Weight classes
+                    </label>
+                    <span className=" relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)]  before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-purple-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
+                      <select
+                        id="weightclasses"
+                        className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      >
+                        <optgroup label="Men">
+                          <option value="83">83</option>
+                          <option value="93">93</option>
+                        </optgroup>
+                        <optgroup label="Women">
+                          <option value="47">47</option>
+                          <option value="52">52</option>
+                          <option value="57">57</option>
+                          <option value="63">63</option>
+                          <option value="69">69</option>
+                          <option value="76">76</option>
+                          <option value="84">84</option>
+                          <option value="84+">84+</option>
+                        </optgroup>
+                      </select>
                     </span>
-                  </label>
+                  </div>
                 </div>
               </div>
 
