@@ -1,17 +1,18 @@
 import pickle
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from io import BytesIO
+import base64
+
+from matplotlib.figure import Figure
 
 class PowerliftPredictor:
 
-    def __init__(self) -> None:
-        self.df = pd.read_csv('./data/openipf-2023-05-06-da06eba9.csv', usecols=['Name', 'Sex', 'Event', 'Equipment','Division', 'Age', 'BodyweightKg', 'Squat1Kg','Squat2Kg','Squat3Kg', 'Best3SquatKg',
-         'Bench1Kg','Bench2Kg','Bench3Kg', 'Best3BenchKg', 'Deadlift1Kg','Deadlift2Kg','Deadlift3Kg',
-         'Best3DeadliftKg', 'TotalKg', 'Place', 'Dots', 'Wilks', 'Glossbrenner',
-       'Goodlift', 'Tested', 'Date', 'WeightClassKg'])
+    def __init__(self, path_to_plot, path_to_dataset, use_cols) -> None:
+        self.df = pd.read_csv(path_to_dataset, usecols=use_cols)
         
-        self.path_to_plot = 'output2.png'
+        self.path_to_plot = path_to_plot
     
     def formatDf(self):
 
@@ -20,6 +21,8 @@ class PowerliftPredictor:
 
         # Remove event and Equipment columns
         self.df.drop(columns=['Event', 'Equipment'], inplace=True)
+
+        
 
         return
         
@@ -73,7 +76,7 @@ class PowerliftPredictor:
 
     def setWeightClass(self, weight:int) -> None:
 
-        self.weightclass = weight
+        self.weightclass = str(weight)
 
         return
     
@@ -84,10 +87,10 @@ class PowerliftPredictor:
         except:
             return None
     
-    def makeHist(self, total):
+    # def makeHist(self, total):
 
         weightclass = self.getWeightClass()
-        #path_to_file = './client/output.png'
+        
 
         if weightclass is None:
 
@@ -105,6 +108,7 @@ class PowerliftPredictor:
             lifter_color = '#33ea93'
             all_lifters_color = '#9333ea'
 
+            
             txt = 'Distribution of achieved totals in the {0}kg weightclass'.format(weightclass)
             label_txt ='All {0}kg powerlifters'.format(weightclass)
             lifter_txt = 'Your total - {0}'.format(total)
@@ -122,15 +126,111 @@ class PowerliftPredictor:
 
             fig.patch.set_facecolor(plot_background)
 
+            plt.title(color='white', label=label_txt)
+           
+
+            ax.spines['bottom'].set_color('white')
+            ax.spines['top'].set_color('white')
+            ax.spines['left'].set_color('white')
+            ax.spines['right'].set_color('white')
+            ax.tick_params(axis='x', colors='white')
+            ax.tick_params(axis='y', colors='white')
+
+            ax.xaxis.label.set_color('white')
+            ax.yaxis.label.set_color('white')
+
+            
+
             plt.axvline(x=total, color=lifter_color, label=lifter_txt)
 
             plt.gca().set(title=txt, ylabel='Frequency', xlabel='Total')
 
             plt.legend(facecolor=plot_background)
+            
 
-            plt.savefig(self.path_to_plot)
+            plt.savefig(self.path_to_plot, transparent=False)
+
+            plt.clf()
+            plt.close()
+
+            
 
             return self.path_to_plot
+        
+    def makeHist2(self, total):
+
+        weightclass = self.getWeightClass()
+        
+
+        if weightclass is None:
+
+            return 'Something went wrong'
+        
+        else:
+            
+
+            
+            data = np.array(self.df.loc[(self.df.WeightClassKg == weightclass)]['TotalKg'])
+
+            
+            
+            
+
+            plot_background = '#09090b'
+            lifter_color = '#33ea93'
+            all_lifters_color = '#9333ea'
+
+            txt = 'Distribution of achieved totals in the {0}kg weightclass'.format(weightclass)
+            label_txt ='All {0}kg powerlifters'.format(weightclass)
+            lifter_txt = 'Your total - {0}'.format(total)
+
+            fig = Figure()
+            ax = fig.subplots()
+
+            ax.hist(x=data, bins=100, color=all_lifters_color, alpha=1, label=label_txt)
+
+
+            ax.spines['bottom'].set_color('white')
+            ax.spines['top'].set_color('white')
+            ax.spines['left'].set_color('white')
+            ax.spines['right'].set_color('white')
+            ax.tick_params(axis='x', colors='white')
+            ax.tick_params(axis='y', colors='white')
+
+            ax.xaxis.label.set_color('white')
+            ax.yaxis.label.set_color('white')
+
+
+
+
+
+            ax.set_facecolor(color=plot_background)
+
+
+            fig.patch.set_facecolor(plot_background)
+
+            ax.axvline(x=total, color=lifter_color, label=lifter_txt)
+            ax.legend(labelcolor=['white', 'white'], facecolor=plot_background)
+
+            ax.set(ylabel='Frequency', xlabel='Total')
+
+            fig.suptitle(t=txt, color='white')
+
+
+            buf = BytesIO()
+            fig.savefig(buf, format='png')
+
+            # embed result in the html output
+            res = base64.b64encode(buf.getbuffer()).decode('ascii')
+
+            
+
+
+            fig.savefig(self.path_to_plot)
+            return f"<img src='data:image/png;base64,{res}'/>"
+
+        
+        
 
 
 
