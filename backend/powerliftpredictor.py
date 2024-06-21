@@ -106,77 +106,9 @@ class PowerliftPredictor:
         except:
             return None
     
-    # def makeHist(self, total):
-
-        weightclass = self.getWeightClass()
+    
         
-
-        if weightclass is None:
-
-            return 'Something went wrong'
-        
-        else:
-            
-
-            
-            data = np.array(self.df.loc[(self.df.WeightClassKg == weightclass)]['TotalKg'])
-
-
-
-            plot_background = '#09090b'
-            lifter_color = '#33ea93'
-            all_lifters_color = '#9333ea'
-
-            
-            txt = 'Distribution of achieved totals in the {0}kg weightclass'.format(weightclass)
-            label_txt ='All {0}kg powerlifters'.format(weightclass)
-            lifter_txt = 'Your total - {0}'.format(total)
-
-
-
-            fig, ax = plt.subplots(nrows=1, ncols=1)
-
-            plt.style.use('dark_background')
-            plt.hist(data, bins=100,  color=all_lifters_color, alpha=1, label=label_txt)
-
-
-            ax.set_facecolor(color=plot_background)
-
-
-            fig.patch.set_facecolor(plot_background)
-
-            plt.title(color='white', label=label_txt)
-           
-
-            ax.spines['bottom'].set_color('white')
-            ax.spines['top'].set_color('white')
-            ax.spines['left'].set_color('white')
-            ax.spines['right'].set_color('white')
-            ax.tick_params(axis='x', colors='white')
-            ax.tick_params(axis='y', colors='white')
-
-            ax.xaxis.label.set_color('white')
-            ax.yaxis.label.set_color('white')
-
-            
-
-            plt.axvline(x=total, color=lifter_color, label=lifter_txt)
-
-            plt.gca().set(title=txt, ylabel='Frequency', xlabel='Total')
-
-            plt.legend(facecolor=plot_background)
-            
-
-            plt.savefig(self.path_to_plot, transparent=False)
-
-            plt.clf()
-            plt.close()
-
-            
-
-            return self.path_to_plot
-        
-    def makeHist2(self, total):
+    def makeHist(self, total):
 
         weightclass = self.getWeightClass()
         
