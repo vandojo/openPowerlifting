@@ -2,6 +2,18 @@
 
 In this project I created a web application that provides the attempt selection for someone competing in a powerlifting meet. Based on the user's input, a machine learning model will predict what a sensible next attempt is. The machine learning model is a decision tree. It will also create a plot showing the standing of the lifter among all other lifters in their weightclass based on their projected total. The front end is made with React and Tailwind, the backend is made with Python.
 
+## Demo
+
+![](https://github.com/vandojo/openPowerlifting/backend/openpowerliftExample.gif)
+
+## Contents
+
+- [Features](#features)
+- [Data attribution](#data-attribution)
+- [Dependencies](#dependencies)
+- [Tech stack](#tech-stack)
+- [How to run the project](#how-to-run-the-project)
+
 ## Features
 
 - **Predicts your next attempt**
@@ -21,7 +33,7 @@ You may download a copy of the data at https://data.openpowerlifting.org.
 
 - [React](https://react.dev/) - UI Components/JavaScript
 
-## Getting Started
+## How to run the project
 
 ### Dependencies
 
@@ -77,6 +89,4 @@ The workings of the website are quite self explanatory. However, here are some s
 - Just enter one attempt.
 - Just enter one lift.
 
-
 By submitting the form the server passes the data to the machine learning model. This uses a decision tree to predict your optimal next attempt. The server also creates a plot showing how you would stack up against your peers if you achieved this lift.
-
