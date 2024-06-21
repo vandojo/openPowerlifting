@@ -14,7 +14,7 @@ from backend import powerliftpredictor
 
 
 lift_format = liftformatter.LiftFormatter()
-predictor = powerliftpredictor.PowerliftPredictor(path_to_plot='client/public/output2.png', path_to_dataset='backend/data/openipf-2023-05-06-da06eba9.csv', use_cols=['Name', 'Sex', 'Event', 'Equipment','Division', 'Age', 'BodyweightKg', 'Squat1Kg','Squat2Kg','Squat3Kg', 'Best3SquatKg',
+predictor = powerliftpredictor.PowerliftPredictor(path_to_plot='client/public/output2.png', path_to_dataset='backend/data/reduceddataset.csv', use_cols=['Name', 'Sex', 'Event', 'Equipment','Division', 'Age', 'BodyweightKg', 'Squat1Kg','Squat2Kg','Squat3Kg', 'Best3SquatKg',
          'Bench1Kg','Bench2Kg','Bench3Kg', 'Best3BenchKg', 'Deadlift1Kg','Deadlift2Kg','Deadlift3Kg',
          'Best3DeadliftKg', 'TotalKg', 'Place', 'Dots', 'Wilks', 'Glossbrenner',
        'Goodlift', 'Tested', 'Date', 'WeightClassKg'])
