@@ -48,6 +48,24 @@ class LiftFormatter:
             deadlift = list(map(self.poundsToKilos, deadlift))
 
             return {'sq':squats, 'bp': bench, 'dl':deadlift}
+        
+    
+    def toFloat(self, lift1, lift2) -> list:
+
+        lifts = []
+
+        if lift1 == '':
+            lifts.append(float(0))
+        else:
+            lifts.append(float(lift1))
+        
+        if lift2 == '':
+            lifts.append(float(0))
+        else:
+            lifts.append(float(lift2))
+
+
+        return lifts
     
     def restoreLifts(self, squats:list, bench: list, deadlifts: list, weightmetric: bool) -> tuple:
 
@@ -76,7 +94,10 @@ class LiftFormatter:
 
         # order = np.concatenate((sq,bp,dl), axis=None)
         if not weightmetric:
+            
             sq3, bp3, dl3, = list(map(self.kilosToPounds, (sq, bp, dl)))
+            sq3, bp3, dl3, = list(map(self.roundLifts, (sq3, bp3, dl3)))
+            return (sq3, bp3, dl3)
             
         
 
