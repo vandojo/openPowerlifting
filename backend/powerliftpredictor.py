@@ -131,7 +131,7 @@ class PowerliftPredictor:
             lifter_color = '#33ea93'
             all_lifters_color = '#9333ea'
 
-            txt = 'Distribution of achieved totals in the {0}kg weightclass'.format(weightclass)
+            txt = 'Distribution of achieved totals in kilos in the {0}kg weightclass'.format(weightclass)
             label_txt ='All {0}kg powerlifters'.format(weightclass)
             lifter_txt = 'Your total - {0}'.format(total)
 

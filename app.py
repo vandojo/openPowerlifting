@@ -142,8 +142,14 @@ def predict():
         # set the weightclass of the lifter for plotting
         predictor.setWeightClass(weight=data['Weightclass'])
 
-        # make the plot showing the bin in which the total falls
-        img = predictor.makeHist(total=total)
+        if data['Weightmetric']:
+            # make the plot showing the bin in which the total falls
+            img = predictor.makeHist(total=total)
+        else:
+            # convert total to kilos
+            total_kilos = round(total / 2.20462, 1)
+            # make the plot showing the bin in which the total falls
+            img = predictor.makeHist(total=total_kilos)
         
         
         
