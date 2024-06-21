@@ -108,5 +108,6 @@ class LiftFormatter:
 
 
         return (sq3, bp3, dl3)
+    
 
     

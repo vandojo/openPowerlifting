@@ -17,3 +17,4 @@ export function Checkbox({txt, spanclasses, labelclasses, name, onchange}) {
     </div>
   );
 }
+

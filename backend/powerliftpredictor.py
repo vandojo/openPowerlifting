@@ -177,9 +177,11 @@ class PowerliftPredictor:
             
 
 
+
             #fig.savefig(self.path_to_plot)
             #return f"<img src='data:image/png;base64,{res}'></img>"
             return res
+
 
 
     

@@ -77,4 +77,6 @@ The workings of the website are quite self explanatory. However, here are some s
 - Just enter one attempt.
 - Just enter one lift.
 
+
 By submitting the form the server passes the data to the machine learning model. This uses a decision tree to predict your optimal next attempt. The server also creates a plot showing how you would stack up against your peers if you achieved this lift.
+

@@ -5,6 +5,7 @@ import {SubmitButton} from "./submitbutton";
 
 import FlaskAPI from "./flaskAPI";
 
+
 export function Form3({formdata, setformdata, setpredictions, setplot}) {
   // Method to update the table with predictions on the front end
   const handlePredictions = (prediction) => {
