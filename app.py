@@ -142,7 +142,7 @@ def predict():
         predictor.setWeightClass(weight=data['Weightclass'])
 
         # make the plot showing the bin in which the total falls
-        img = predictor.makeHist2(total=total)
+        img = predictor.makeHist(total=total)
         
         
         
