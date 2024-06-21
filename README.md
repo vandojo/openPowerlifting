@@ -4,7 +4,7 @@ In this project I created a web application that provides the attempt selection 
 
 ## Demo
 
-![](https://github.com/vandojo/openPowerlifting/backend/openpowerliftExample.gif)
+![](https://github.com/vandojo/openPowerlifting/blob/main/backend/openpowerliftExample.gif)
 
 ## Contents
 
