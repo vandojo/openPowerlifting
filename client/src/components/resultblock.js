@@ -9,3 +9,4 @@ export function ResultBlock({data, plot, alttxt}) {
     </div>
   );
 }
+
