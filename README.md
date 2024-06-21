@@ -1,9 +1,15 @@
-# A small data analysis project of the Open Powerlifting dataset
+# OpenPowerlifting: a machine learning model that predicts your attempts
 
-In this project I will see if I can make a model that can satisfactorily predict someone's next attempt
-based of their previous attempt.
+In this project I created a web application that provides the attempt selection for someone competing in a powerlifting meet. Based on the user's input, a machine learning model will predict what a sensible next attempt is. The machine learning model is a decision tree. It will also create a plot showing the standing of the lifter among all other lifters in their weightclass based on their projected total. The front end is made with React and Tailwind, the backend is made with Python.
 
-data attribution:
+## Features
+
+- **Predicts your next attempt**
+- **Predicts final attempts**
+- **Automatically converts pounds to kilos**
+- **Generates a plot showing your standing**
+
+## Data attribution:
 
 This page uses data from the OpenPowerlifting project, https://www.openpowerlifting.org.
 You may download a copy of the data at https://data.openpowerlifting.org.
@@ -71,4 +77,6 @@ The workings of the website are quite self explanatory. However, here are some s
 - Just enter one attempt.
 - Just enter one lift.
 
-By submitting the form the server passes the data to the machine learning model. This uses a decision tree to predict your optimal next attempt. The server also creates a plot showing how you would stack up against your peers if you achieved this lift. The app.py file currently has the pickle files commected out. These are not in the repo.
+
+By submitting the form the server passes the data to the machine learning model. This uses a decision tree to predict your optimal next attempt. The server also creates a plot showing how you would stack up against your peers if you achieved this lift.
+

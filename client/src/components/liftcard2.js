@@ -29,4 +29,4 @@ export function Liftcard({lifts, onchange}) {
 
   return <>{liftarray}</>;
 }
-//
+

@@ -41,4 +41,4 @@ export function Table({headertxt, colnames, data}) {
     </div>
   );
 }
-//
+

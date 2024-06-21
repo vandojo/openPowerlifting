@@ -15,4 +15,4 @@ export function Thead({theadcls, colnames, colcls}) {
     </thead>
   );
 }
-//
+

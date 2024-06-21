@@ -28,12 +28,16 @@ class PowerliftPredictor:
         
 
 
-    def loadModels(self, squatmodel, benchmodel, deadliftmodel):
+    def loadModels(self, squatmodel, benchmodel, deadliftmodel, nxtsq, nxtbp, nxtdl):
 
         # load the models
         self.squatmodel = pickle.load(open(squatmodel, 'rb'))
         self.benchmodel = pickle.load(open(benchmodel, 'rb'))
         self.deadliftmodel = pickle.load(open(deadliftmodel, 'rb'))
+
+        self.nxtsq = pickle.load(open(nxtsq, 'rb'))
+        self.nxtbp = pickle.load(open(nxtbp, 'rb'))
+        self.nxtdl = pickle.load(open(nxtdl, 'rb'))
 
         return
     
@@ -48,22 +52,37 @@ class PowerliftPredictor:
             return self.benchmodel.predict(lift_df)[0]
         else:
             return self.deadliftmodel.predict(lift_df)[0]
+    
+    def nextAttempt(self, lift1:float, lift1Col:str, modelName:str) -> float:
+
+        lift_df = pd.DataFrame({lift1Col:[lift1]})
+
+        if modelName == 'sq':
+            nextLift = self.nxtsq.predict(lift_df)[0]
+            return nextLift
+        elif modelName == 'bp':
+            nextLift = self.nxtbp.predict(lift_df)[0]
+            return nextLift
+        else:
+            nextLift = self.nxtdl.predict(lift_df)[0]
+            return nextLift
         
 
     
-    def predict(self, final:bool, squats:list, bench:list, deadlift:list) -> tuple:
+    def predict(self, final:bool, lifts:list, lift1Col:str, lift2Col:str, modelName:str) -> tuple:
 
         if final:
 
-            sq3 = self.finalAttempt(lift1=squats[0], lift1Col='Squat1Kg', lift2=squats[1], lift2Col='Squat2Kg', modelName='sq')
-            bp3 = self.finalAttempt(lift1=bench[0], lift1Col='Bench1Kg', lift2=bench[1], lift2Col='Bench2Kg', modelName='bp')
-            dl3 = self.finalAttempt(lift1=deadlift[0], lift1Col='Deadlift1Kg', lift2=deadlift[1], lift2Col='Deadlift2Kg', modelName='dl')
+            lift = self.finalAttempt(lift1=lifts[0], lift1Col=lift1Col, lift2Col=lift2Col, lift2=lifts[1], modelName=modelName)
 
-            return (sq3, bp3, dl3)
+            return lift
+
+            
         else:
             # call method if it is not the final attempt
             # need to make this method
-            pass
+            lift = self.nextAttempt(lift1=lifts[1], lift1Col=lift1Col, modelName=modelName)
+            return lift
         
     def squatPredict(self, sq1:float, sq2=0)-> float:
 
@@ -226,12 +245,10 @@ class PowerliftPredictor:
             
 
 
-            fig.savefig(self.path_to_plot)
-            return f"<img src='data:image/png;base64,{res}'/>"
 
-        
-        
-        
+            #fig.savefig(self.path_to_plot)
+            #return f"<img src='data:image/png;base64,{res}'></img>"
+            return res
 
 
 

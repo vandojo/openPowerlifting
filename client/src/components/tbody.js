@@ -18,4 +18,4 @@ export function Tbody({tdcls, data}) {
     );
   return <tbody>{tableRow}</tbody>;
 }
-//
+
