@@ -54,7 +54,12 @@ git clone https://github.com/vandojo
 cd OpenPowerlifting
 ```
 
-### 2. Start the python server
+### 2. Unzip the model files
+
+The machine learning models were to big to be uploaded to github. They are zipped in the directory: backend/models/compressed.
+To be able to run this project, unzip the three zipfiles and store the models in: backend/models. This is where the app.py file will look for them. Once this is done continue.
+
+### 3. Start the python server
 
 On Linux:
 
@@ -68,18 +73,18 @@ On Windows:
 python app.py
 ```
 
-### 3. Start the dev server
+### 4. Start the dev server
 
 ```shell
 cd client
 npm start
 ```
 
-### 4. Open the app in the browser
+### 5. Open the app in the browser
 
 vist [http://localhost:5000](http://localhost:5000) in your browser
 
-### 5. Have fun!
+### 6. Have fun!
 
 The workings of the website are quite self explanatory. However, here are some suggestions of what you can do:
 
